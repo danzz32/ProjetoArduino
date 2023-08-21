@@ -3,12 +3,13 @@ Neste projeto, exploramos a programação de um Arduino em ```C++```, com a fina
 
 ---
 ### Materiais
-Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para montagem do arduíno e seus componentes.
+Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para montagem e programação do dispositivo.
 
 |  Hardware            |  Software            |
 |----------------------|----------------------|
 | Protoboard           | Arduíno IDE          |
 | Sensor DHT22         | Drivers do arduíno   |
+| Display LCD          | Excel                |
 | Display LCD          | Driver Excel         |
 | Resistores           |
 | Buzzer               |
