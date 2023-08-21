@@ -17,6 +17,6 @@ Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para mon
 
 ---
 
-### Colaboreadores
+### Colaboradores
 - [Dayane Caliberda](https://github.com/DayaneCaliberda)
 - [Ivys Kalil](https://github.com/ivybin)
