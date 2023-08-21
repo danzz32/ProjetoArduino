@@ -3,7 +3,7 @@ Neste projeto, exploramos a programação de um Arduino em ```C++```, com a fina
 
 ---
 ### Materiais
-Abaixo segue uma tabela indicando os seguintes materiais utilizados para montagem do arduíno e seus componentes.
+Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para montagem do arduíno e seus componentes.
 
 |  Hardware            |  Software            |
 |----------------------|----------------------|
