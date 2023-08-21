@@ -1,5 +1,5 @@
 # Análise de dados em tempo real com Arduíno
-Neste projeto, exploramos a programação de um Arduino em C++, com a finalidade de realizar a coleta e análise de dados em tempo real, fazendo uso de um módulo Wi-Fi. A principal tarefa envolve a captação precisa de informações relacionadas à temperatura e umidade, obtidas por meio do sensor DHT22, seguida pela transmissão instantânea desses dados por intermédio do módulo Wi-Fi, direcionando-os para uma planilha de registro e análise.
+Neste projeto, exploramos a programação de um Arduino em ```C++```, com a finalidade de realizar a coleta e análise de dados em tempo real, fazendo uso de um módulo Wi-Fi. A principal tarefa envolve a captação precisa de informações relacionadas à temperatura e umidade, obtidas por meio do sensor DHT22, seguida pela transmissão instantânea desses dados por intermédio do módulo Wi-Fi, direcionando-os para uma planilha de registro e análise.
 
 ---
 ### Materiais
