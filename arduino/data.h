@@ -12,12 +12,6 @@ private:
   int ano;
 
 public:
-  data() {
-    this->dia = 0;
-    this->mes = 0;
-    this->ano = 0;
-  };
-
   int getDia() {
     return this->dia;
   };
@@ -39,24 +33,26 @@ public:
     this->ano = data_hora_local->tm_year + 1900;
 
     std::ostringstream resultado;
-
     resultado << getDia() << "/" << getMes() << "/" << getAno();
-
     return resultado.str();
   };
 
   void limpaTela() {
-    #ifdef _WIN32
-      system("cls");
-    #else
-      std::cout << "\033[2J\033[1;1H";
-    #endif
+    Serial.println("\033[2J\033[1;1H");
+  };
+
+  void horaAtual() {
+    time_t now = now();
+    Serial.print(hour(now) - 3); 
+    Serial.print(":");
+    Serial.print(minute(now));
+    Serial.print(":");
+    Serial.println(second(now));
   };
 
   std::string horario() {
     time_t now = now();
     std::ostringstream saida;
-
     snprintf(saida, sizeof(9), "%02d:%02d:%02d", hour(now) - 3, minute(now), second(now));
     return saida.str();
   };
