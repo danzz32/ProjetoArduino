@@ -11,7 +11,7 @@ Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para mon
 | Sensor DHT22         | Drivers do arduíno   |
 | Display LCD          | Excel                |
 | Display LCD          | Driver Excel         |
-| Resistores           |
+| Resistores           | Servidor Web         |
 | Buzzer               |
 | Módulo Wi-Fi ESP01   |
 
