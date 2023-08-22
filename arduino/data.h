@@ -55,11 +55,9 @@ public:
 
   std::string horario() {
     time_t now = now();
-    string horario;
-
     std::ostringstream saida;
-    snprintf(saida, sizeof(9), "%02d:%02d:%02d", hour(now) - 3, minute(now), second(now));
 
+    snprintf(saida, sizeof(9), "%02d:%02d:%02d", hour(now) - 3, minute(now), second(now));
     return saida.str();
   };
 };

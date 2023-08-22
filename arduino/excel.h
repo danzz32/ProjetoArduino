@@ -1,57 +1,72 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include <SD.h>  // Para acessar o cartão SD
+#include <WiFiClientSecure.h>
+#include <PubSubClient.h>
+#include <SD.h>
 
 class excel {
 private:
-  std::string arquivo;
-  std::vector<std::vector<std::string>> dados;
+  String arquivo;
+  std::vector<std::vector<String>> dados;
 
 public:
   excel() {
     this->arquivo = "dados.csv";
-    // Inicialize o cartão SD
     if (!SD.begin(SS)) {
       Serial.println("Falha ao inicializar o cartão SD!");
     }
   }
 
-  void exportaDados() {
-    File arquivoCSV = SD.open(this->arquivo.c_str(), FILE_READ);
+  void coletarDados() {
+    float temperatura = lerSensorTemperatura();
+    float umidade = lerSensorUmidade();
+    String dataHora = obterDataHora();
 
-    if (arquivoCSV) {
-      // Ler o conteúdo do arquivo CSV
-      std::string csvContent;
-      while (arquivoCSV.available()) {
-        csvContent += char(arquivoCSV.read());
+    // Armazena os dados coletados em um vetor
+    std::vector<String> registro;
+    registro.push_back(String(temperatura));
+    registro.push_back(String(umidade));
+    registro.push_back(dataHora);
+    dados.push_back(registro);
+  }
+
+  String formatarDados() {
+    String dadosCSV = "";
+    for (const std::vector<String>& linha : dados) {
+      for (const String& campo : linha) {
+        dadosCSV += campo + ";";
       }
-      arquivoCSV.close();
-
-      // Configurar a conexão Wi-Fi
-      WiFi.begin("SSID", "Senha");
-      while (WiFi.status() != WL_CONNECTED) {
-        delay(1000);
-        Serial.println("Conectando ao Wi-Fi...");
-      }
-
-      // Configurar a solicitação HTTP
-      HTTPClient http;
-      http.begin("http://10.98.1.92/receber_dados.php");  // Substitua pelo endereço IP e caminho do servidor de destino
-      http.addHeader("Content-Type", "text/csv");
-
-      // Enviar o conteúdo do arquivo CSV via POST
-      int httpCode = http.POST(csvContent);
-      if (httpCode == HTTP_CODE_OK) {
-        Serial.println("Dados exportados com sucesso!");
-      } else {
-        Serial.println("Erro ao enviar os dados!");
-      }
-      http.end();
-
-      // Desconectar o Wi-Fi
-      WiFi.disconnect(true);
-    } else {
-      Serial.println("Erro ao abrir o arquivo CSV!");
+      dadosCSV += "\n";
     }
+    return dadosCSV;
+  }
+
+  void callback(char* topic, byte* payload, unsigned int length) {
+    // Processa mensagens MQTT recebidas
+    Serial.println("Mensagem MQTT recebida!");
+    Serial.print("Tópico: ");
+    Serial.println(topic);
+    Serial.print("Mensagem: ");
+    for (int i = 0; i < length; i++) {
+      Serial.print((char)payload[i]);
+    }
+    Serial.println();
+  }
+
+  float lerSensorTemperatura() {
+    // adicionar leitura do seu sensor de temperatura
+    return 25.5;  // Valor de exemplo
+  }
+
+  float lerSensorUmidade() {
+    // adicionar leitura do sensor de umidade
+    return 50.0;  // Valor de exemplo
+  }
+
+  String obterDataHora() {
+    data date;
+    std::ostringstream saida;
+    saida << date.dataAtual() << ";" << date.horario();
+    return saida.str();
   }
 };
