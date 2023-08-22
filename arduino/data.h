@@ -14,11 +14,11 @@ private:
 public:
   int getDia() {
     return this->dia;
-  };
+  }
 
   int getMes() {
     return this->mes;
-  };
+  }
 
   int getAno() {
     return this->ano;
@@ -35,25 +35,23 @@ public:
     std::ostringstream resultado;
     resultado << getDia() << "/" << getMes() << "/" << getAno();
     return resultado.str();
-  };
+  }
 
   void limpaTela() {
     Serial.println("\033[2J\033[1;1H");
-  };
+  }
 
-  void horaAtual() {
-    time_t now = now();
-    Serial.print(hour(now) - 3); 
-    Serial.print(":");
-    Serial.print(minute(now));
-    Serial.print(":");
-    Serial.println(second(now));
-  };
-
-  std::string horario() {
+  std::string horaAtual() {
     time_t now = now();
     std::ostringstream saida;
     snprintf(saida, sizeof(9), "%02d:%02d:%02d", hour(now) - 3, minute(now), second(now));
     return saida.str();
-  };
+  }
+
+  void exibeDataHora() {
+    Serial.print(dataAtual());
+    Serial.print(" ");
+    Serial.print(horaAtual());
+    delay(1000);
+  }
 };

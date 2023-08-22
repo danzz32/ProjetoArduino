@@ -4,13 +4,14 @@
 #include <PubSubClient.h>
 #include <SD.h>
 
-class ExcelExporter {
+class excel {
 private:
   String arquivo;
   std::vector<std::vector<String>> dados;
+  dht22 sensor;
 
 public:
-  ExcelExporter() {
+  excel() {
     this->arquivo = "dados.csv";
     if (!SD.begin(SS)) {
       Serial.println("Falha ao inicializar o cartão SD!");
@@ -92,13 +93,11 @@ public:
   }
 
   float lerSensorTemperatura() {
-    // Adicionar leitura do seu sensor de temperatura
-    return 25.5;  // Valor de exemplo
+    return sensor.getTemperatura();  
   }
 
   float lerSensorUmidade() {
-    // Adicionar leitura do sensor de umidade
-    return 50.0;  // Valor de exemplo
+    return sensor.getUmidade();  
   }
 
   String obterData() {
