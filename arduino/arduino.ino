@@ -1,7 +1,11 @@
 #include <Wire.h>
 #include <RTClib.h>
+#include <DHT.h>
+#include <LiquidCrystal_I2C.h>
 
 RTC_DS3231 rtc;
+data date;
+dht22 sensor;
 
 void setup() {
   Wire.begin();
@@ -16,11 +20,9 @@ void setup() {
   }
 
   Serial.begin(9600);
+  sensor.begin();
 }
 
 void loop() {
-  data date;
-  date.dataAtual();
-  date.horaAtual();
-  delay(1000);
+  date.exibeDataHora();
 }
