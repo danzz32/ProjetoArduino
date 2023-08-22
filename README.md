@@ -10,9 +10,8 @@ Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para mon
 | Protoboard           | Arduíno IDE          |
 | Sensor DHT22         | Drivers do arduíno   |
 | Display LCD          | Excel                |
-| Display LCD          | Driver Excel         |
 | Resistores           | Servidor Web         |
-| Buzzer               |
+| Buzzer               | Driver Excel         |
 | Módulo Wi-Fi ESP01   |
 
 ---
