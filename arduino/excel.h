@@ -58,7 +58,7 @@ public:
 
     // Configurar a solicitação HTTP
     HTTPClient http;
-    http.begin("http://10.98.1.92/receber_dados.php");  // Substitua pelo endereço do servidor de destino
+    http.begin("http://10.98.1.92/receber_dados.php");
     http.addHeader("Content-Type", "text/csv");
 
     // Enviar os dados via POST
