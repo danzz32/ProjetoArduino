@@ -4,13 +4,13 @@
 #include <PubSubClient.h>
 #include <SD.h>
 
-class excel {
+class ExcelExporter {
 private:
   String arquivo;
   std::vector<std::vector<String>> dados;
 
 public:
-  excel() {
+  ExcelExporter() {
     this->arquivo = "dados.csv";
     if (!SD.begin(SS)) {
       Serial.println("Falha ao inicializar o cartão SD!");
@@ -20,7 +20,8 @@ public:
   void coletarDados() {
     float temperatura = lerSensorTemperatura();
     float umidade = lerSensorUmidade();
-    String dataHora = obterDataHora();
+    String data = obterData();
+    String hora = obterHora();
 
     // Armazena os dados coletados em um vetor
     std::vector<String> registro;
@@ -28,6 +29,9 @@ public:
     registro.push_back(String(umidade));
     registro.push_back(dataHora);
     dados.push_back(registro);
+
+    // Salva os dados no arquivo CSV local
+    salvarDados(temperatura, umidade, dataHora);
   }
 
   String formatarDados() {
@@ -36,37 +40,78 @@ public:
       for (const String& campo : linha) {
         dadosCSV += campo + ";";
       }
-      dadosCSV += "\n";
+      dadosCSV += "\n";  // Nova linha para cada registro
     }
     return dadosCSV;
   }
 
-  void callback(char* topic, byte* payload, unsigned int length) {
-    // Processa mensagens MQTT recebidas
-    Serial.println("Mensagem MQTT recebida!");
-    Serial.print("Tópico: ");
-    Serial.println(topic);
-    Serial.print("Mensagem: ");
-    for (int i = 0; i < length; i++) {
-      Serial.print((char)payload[i]);
+  void exportarDados() {
+    coletarDados();
+    String dadosFormatados = formatarDados();
+
+    // Configurar a conexão Wi-Fi
+    WiFi.begin("SSID", "Senha");
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(1000);
+      Serial.println("Conectando ao Wi-Fi...");
     }
-    Serial.println();
+
+    // Configurar a solicitação HTTP
+    HTTPClient http;
+    http.begin("http://10.98.1.92/receber_dados.php");  // Substitua pelo endereço do servidor de destino
+    http.addHeader("Content-Type", "text/csv");
+
+    // Enviar os dados via POST
+    int httpCode = http.POST(dadosFormatados);
+    if (httpCode == HTTP_CODE_OK) {
+      Serial.println("Dados exportados com sucesso via HTTP!");
+    } else {
+      Serial.println("Erro ao enviar os dados via HTTP!");
+    }
+    http.end();
+
+    // Desconectar o Wi-Fi
+    WiFi.disconnect(true);
+  }
+
+  void salvarDados(float temperatura, float umidade, String data, String hora) {
+    File arquivoCSV = SD.open(this->arquivo, FILE_APPEND);
+
+    if (arquivoCSV) {
+      arquivoCSV.print(temperatura);
+      arquivoCSV.print(";");
+      arquivoCSV.print(umidade);
+      arquivoCSV.print(";");
+      arquivoCSV.println(data);
+      arquivoCSV.print(";");
+      arquivoCSV.println(data);
+      arquivoCSV.close();
+    } else {
+      Serial.println("Erro ao abrir o arquivo CSV!");
+    }
   }
 
   float lerSensorTemperatura() {
-    // adicionar leitura do seu sensor de temperatura
+    // Adicionar leitura do seu sensor de temperatura
     return 25.5;  // Valor de exemplo
   }
 
   float lerSensorUmidade() {
-    // adicionar leitura do sensor de umidade
+    // Adicionar leitura do sensor de umidade
     return 50.0;  // Valor de exemplo
   }
 
-  String obterDataHora() {
+  String obterData() {
     data date;
     std::ostringstream saida;
-    saida << date.dataAtual() << ";" << date.horario();
+    saida << date.dataAtual();
+    return saida.str();
+  }
+
+  String obterHora() {
+    data date;
+    std::ostringstream saida;
+    saida << date.horario();
     return saida.str();
   }
 };
