@@ -1,12 +1,18 @@
 #include <Wire.h>
-#include <RTClib.h>
 #include <DHT.h>
-#include <LiquidCrystal_I2C.h>
+#include "util/*"
+#include "librarys/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
+#include "librarys/RTCLib/src/RTCLib.h"
 
 RTC_DS3231 rtc;
 data date;
 dht22 sensor;
+<<<<<<< HEAD
 // branch Dayane
+=======
+excel planilha;
+
+>>>>>>> 54e858cd648884de1f1a75029be08a61a5b4d437
 void setup() {
   Wire.begin();
 
