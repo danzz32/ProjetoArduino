@@ -1,7 +1,8 @@
 #include <Wire.h>
 #include <RTClib.h>
 #include <DHT.h>
-#include <LiquidCrystal_I2C.h>
+#include "util/*"
+#include "librarys/LiquidCrystal_I2C/*"
 
 RTC_DS3231 rtc;
 data date;
