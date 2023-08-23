@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include <DHT.h>
+#include "DHT/DHT.h"
 #include "util/*"
 #include "LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 #include "RTCLib/src/RTCLib.h"
