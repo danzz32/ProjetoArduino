@@ -6,6 +6,7 @@
 RTC_DS3231 rtc;
 data date;
 dht22 sensor;
+excel planilha;
 
 void setup() {
   Wire.begin();
