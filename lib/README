@@ -1,0 +1,46 @@
+Este diretório destina-se a bibliotecas específicas do projeto (privadas).
+O PlatformIO irá compilá-las em bibliotecas estáticas e vinculá-las ao arquivo executável.
+
+O código-fonte de cada biblioteca deve ser colocado em um diretório separado próprio
+("lib/seu_nome_de_biblioteca/[aqui estão os arquivos de origem]").
+
+Por exemplo, veja a estrutura das duas bibliotecas a seguir, Foo e Bar:
+
+lua
+Copy code
+|--lib
+|  |
+|  |--Bar
+|  |  |--docs
+|  |  |--examples
+|  |  |--src
+|  |     |- Bar.c
+|  |     |- Bar.h
+|  |  |- library.json (opcional, opções de compilação personalizadas, etc.) https://docs.platformio.org/page/librarymanager/config.html
+|  |
+|  |--Foo
+|  |  |- Foo.c
+|  |  |- Foo.h
+|  |
+|  |- README --> ESTE ARQUIVO
+|
+|- platformio.ini
+|--src
+   |- main.c
+E o conteúdo de src/main.c:
+
+c
+Copy code
+#include <Foo.h>
+#include <Bar.h>
+
+int main (void)
+{
+  ...
+}
+O PlatformIO Library Dependency Finder encontrará automaticamente as
+bibliotecas dependentes digitalizando os arquivos de origem do projeto.
+
+Mais informações sobre o PlatformIO Library Dependency Finder
+
+https://docs.platformio.org/page/librarymanager/ldf.html
