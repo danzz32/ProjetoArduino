@@ -1,15 +1,20 @@
+#include <Wire.h>
 #include "../lib/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 #include "../lib/DHT/dht.h"
-#include <Wire.h>
 #include "data.h"
+
+#define clk 6
+#define dat 7
+#define rst 8
 
 const int pinoDHT11 = A2; // PINO ANALÓGICO UTILIZADO PELO DHT11
 dht sensor;               // Sensor
 LiquidCrystal_I2C *lcd = new LiquidCrystal_I2C(0x27, 20, 4);
-data *date = new data(); 
+Data *date = new Data(clk, dat, rst);
 
 void LerSensor();
-void Data();
+void DataAtual();
+void DiaAtual(int numDia);
 
 void setup()
 {
@@ -21,14 +26,16 @@ void setup()
 
 void loop()
 {
-  // LerSensor();
-  Data();
-  delay(1000);
+  LerSensor();
+  delay(3000);
+  DataAtual();
+  delay(3000);
 }
 
 void LerSensor()
 {
   sensor.read11(pinoDHT11);
+  lcd->clear();
   lcd->setCursor(0, 0);
   lcd->print("U = ");
   lcd->print(sensor.humidity);
@@ -39,14 +46,50 @@ void LerSensor()
   lcd->print("*C");
 }
 
-void Data()
+void DataAtual()
 {
+  date->atualizar();
+  lcd->clear();
   lcd->setCursor(0, 0);
-lcd->clear();
-lcd->print(date->getDia());
-lcd->print("/");
-lcd->print(date->getMes()); // Use a base decimal (DEC) para a conversão
-lcd->print("/");
-lcd->print(date->getAno());
+  DiaAtual(date->getNumDia());
+  lcd->print(date->getDia());
+  lcd->print("/");
+  lcd->print(date->getMes());
+  lcd->print("/");
+  lcd->print(date->getAno());
 
+  lcd->setCursor(0, 1);
+  lcd->print(date->getHora());
+  lcd->print(":");
+  lcd->print(date->getMinuto());
+  lcd->print(":");
+  lcd->print(date->getSegundo());
+}
+
+void DiaAtual(int numDia)
+{
+  switch (numDia)
+  {
+  case 1:
+    lcd->print("Dom ");
+    break;
+  case 2:
+    lcd->print("Seg ");
+    break;
+  case 3:
+    lcd->print("Ter ");
+    break;
+  case 4:
+    lcd->print("Qua ");
+    break;
+  case 5:
+    lcd->print("Qui ");
+    break;
+  case 6:
+    lcd->print("Sex ");
+    break;
+  case 7:
+    lcd->print("Sab ");
+    break;
+  }
 }
