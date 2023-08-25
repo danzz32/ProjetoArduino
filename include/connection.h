@@ -23,7 +23,7 @@ private:
     Data *date;
     dht *sensor;
     // Comando SQL para inserir dados na tabela
-    char *INSERT = "insert into arduino_fmt.registros(temperatura,umidade,data,horario) values ('%f','%f','%s','%s');";
+    char *INSERT = "insert into arduino_fmt1.registros(temperatura,umidade,data,horario) values ('%f','%f','%s','%s');";
     char *query;
     char *user = USER_DB;
     char *password = DB_PASS;
