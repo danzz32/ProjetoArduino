@@ -1,63 +1,54 @@
-#include <Arduino.h>
-#include <time.h>
+#include "../lib/Time/TimeLib.h"
 
-class data
-{
+class data {
 private:
-    int ano;
-    int mes;
     int dia;
+    int mes;
+    int ano;
     int hora;
     int minuto;
     int segundo;
 
 public:
-    data()
-    {
-        syncTime();
+    // Construtor que obtém a data e hora atual do sistema
+    data() {
+        // Obtenha a hora atual do sistema
+        time_t tempoAtual = now();
+
+        // Converta a hora atual em uma estrutura tm
+        tmElements_t tempoElementos;
+        breakTime(tempoAtual, tempoElementos);
+
+        dia = tempoElementos.Day;
+        mes = tempoElementos.Month;
+        ano = tempoElementos.Year + 1970; // O ano começa em 1970
+        hora = tempoElementos.Hour;
+        minuto = tempoElementos.Minute;
+        segundo = tempoElementos.Second;
     }
 
-    bool syncTime()
-    {
-        time_t atual;
-        time(&atual);
-        struct tm *info = localtime(&atual);
-        this->dia = info->tm_mday;
-        this->mes = info->tm_mon + 1;
-        this->ano = info->tm_year + 1900;
-        this->hora = info->tm_hour;
-        this->minuto = info->tm_min;
-        this->segundo = info->tm_sec;
-        return true;
+    // Métodos para obter o dia, mês, ano, hora, minuto e segundo
+    int getDia() const {
+        return dia;
     }
 
-    int getHora()
-    {
-        return this->hora;
+    int getMes() const {
+        return mes;
     }
 
-    int getMin()
-    {
-        return this->minuto;
+    int getAno() const {
+        return ano;
     }
 
-    int getSec()
-    {
-        return this->segundo;
+    int getHora() const {
+        return hora;
     }
 
-    int getAno()
-    {
-        return this->ano;
+    int getMinuto() const {
+        return minuto;
     }
 
-    int getMes()
-    {
-        return this->mes;
-    }
-
-    int getDia()
-    {
-        return this->dia;
+    int getSegundo() const {
+        return segundo;
     }
 };

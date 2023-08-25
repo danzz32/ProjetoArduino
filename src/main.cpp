@@ -4,9 +4,9 @@
 #include "data.h"
 
 const int pinoDHT11 = A2; // PINO ANALÓGICO UTILIZADO PELO DHT11
-dht DHT;                  // VARIÁVEL DO TIPO DHT
+dht sensor;               // Sensor
 LiquidCrystal_I2C *lcd = new LiquidCrystal_I2C(0x27, 20, 4);
-data *date = new data();
+data *date = new data(); 
 
 void LerSensor();
 void Data();
@@ -21,31 +21,32 @@ void setup()
 
 void loop()
 {
-  //LerSensor();
+  // LerSensor();
   Data();
   delay(1000);
 }
 
 void LerSensor()
 {
-  DHT.read11(pinoDHT11);
+  sensor.read11(pinoDHT11);
   lcd->setCursor(0, 0);
   lcd->print("U = ");
-  lcd->print(DHT.humidity);
+  lcd->print(sensor.humidity);
   lcd->print("%");
   lcd->setCursor(0, 1);
   lcd->print("T = ");
-  lcd->print(DHT.temperature);
+  lcd->print(sensor.temperature);
   lcd->print("*C");
 }
 
 void Data()
 {
   lcd->setCursor(0, 0);
-  lcd->clear();
-  lcd->print(date->getDia());
-  lcd->print("/");
-  lcd->print(date->getMes());
-  lcd->print("/");
-  lcd->print(date->getAno());
+lcd->clear();
+lcd->print(date->getDia());
+lcd->print("/");
+lcd->print(date->getMes()); // Use a base decimal (DEC) para a conversão
+lcd->print("/");
+lcd->print(date->getAno());
+
 }
