@@ -3,13 +3,13 @@
 class Data
 {
 private:
-#define segL 15
-#define minL 24
-#define horL 9
-#define d_semL 5
-#define d_mesL 25
-#define mesL 8
-#define anoL 2023
+    #define segL 15
+    #define minL 24
+    #define horL 9
+    #define d_semL 5
+    #define d_mesL 25
+    #define mesL 8
+    #define anoL 2023
 
     virtuabotixRTC myRTC;
     int dia;

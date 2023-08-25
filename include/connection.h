@@ -8,19 +8,21 @@
 class Connection
 {
 private:
-#define SSID "FONMART"
-#define SSID_PASS "fmtwifi01021988/2019"
+    // Conexão com o wifi
+    #define SSID "FONMART"
+    #define SSID_PASS "fmtwifi01021988/2019"
+    // Conexão com o banco de dados
+    #define USER_DB "estagiario_3"
+    #define DB_PASS "Abc12345"
 
-#define USER_DB "estagiario_3"
-#define DB_PASS "Abc12345"
+    #define pinNoteiro 8
+    #define esperaLeitura 500 // TIME OUT DA LEITURA
+    #define FINALIZADA true
 
-#define pinNoteiro 8
-#define esperaLeitura 500 // TIME OUT DA LEITURA
-#define FINALIZADA true
-
-    IPAddress *server_ip = new IPAddress(85, 10, 205, 173);
+    IPAddress *server_ip = new IPAddress(85, 10, 205, 173); // Endereço do banco
     Data *date;
     dht *sensor;
+    // Comando SQL para inserir dados na tabela
     char *INSERT = "insert into arduino_fmt.registros(temperatura,umidade,data,horario) values ('%f','%f','%s','%s');";
     char *query;
     char *user = USER_DB;
