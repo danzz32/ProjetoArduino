@@ -71,4 +71,12 @@ public:
     {
         return segundo;
     }
+
+    String dataAtual(){
+        return String(dia) + "/" + String(mes) + "/" + String(ano);
+    }
+
+    String horarioAtual(){
+        return String(hora) + ":" + String(minuto) + ":" + String(segundo);
+    }
 };
