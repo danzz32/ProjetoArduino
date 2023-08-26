@@ -1,0 +1,2 @@
+Este diretório destina-se a bibliotecas específicas do projeto (privadas).
+O PlatformIO irá compilá-las em bibliotecas estáticas e vinculá-las ao arquivo executável.
