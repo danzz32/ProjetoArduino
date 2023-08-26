@@ -3,7 +3,7 @@
 #include "../lib/MySQL_Connector/src/MySQL_Connection.h"
 #include "../lib/MySQL_Connector/src/MySQL_Cursor.h"
 #include "data.h"
-#include "dht.h"
+#include "../lib/DHT/dht.h"
 
 class Connection
 {
