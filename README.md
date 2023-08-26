@@ -12,7 +12,7 @@ Abaixo segue uma tabela indicando os materiais e ferramentas utilizados para mon
 | Display LCD          | Excel                |
 | Resistores           | Servidor Web         |
 | Buzzer               | Driver Excel         |
-| Módulo Wi-Fi ESP01   |
+| Módulo Wi-Fi ESP01   | Banco de Dados       |
 
 ---
 
