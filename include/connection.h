@@ -65,7 +65,7 @@ private:
 
     bool enviaDados()
     {
-        sprintf(query, INSERT, sensor->temperature, sensor->humidity, date->dataAtual(), date->horarioAtual());
+        sprintf(query, INSERT, sensor->temperature, sensor->humidity, date->dataFormatada(), date->horarioAtual());
         MySQL_Cursor *cur_mem = new MySQL_Cursor(conexao);
         cur_mem->execute(query);
         delete cur_mem;
@@ -77,7 +77,7 @@ private:
         valorInserido++;
         controleLeitura = millis();
     }
-    static Connection *instance;
+    static Connection *instance;  
 
 public:
     Connection(Data *data, dht *sensor)

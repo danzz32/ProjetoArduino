@@ -2,15 +2,17 @@
 #include "../lib/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 #include "../lib/DHT/dht.h"
 #include "data.h"
+#include "connection.h"
 
 #define clk 6
 #define dat 7
 #define rst 8
 
-const int pinoDHT11 = A2; // PINO ANALÓGICO UTILIZADO PELO DHT11
-dht sensor;               // Sensor
+const int pinoDHT11 = A2; // Pino analógico utilizado pelo DHT11
+dht sensor;               // Sensor para medir temperatura e umidade
 LiquidCrystal_I2C *lcd = new LiquidCrystal_I2C(0x27, 20, 4);
 Data *date = new Data(clk, dat, rst);
+Connection *database = new Connection(date, &sensor);
 
 void LerSensor();
 void DataAtual();
@@ -22,6 +24,7 @@ void setup()
   delay(2000);
   lcd->init();
   lcd->backlight();
+  database->begin();
 }
 
 void loop()
@@ -30,6 +33,7 @@ void loop()
   delay(3000);
   DataAtual();
   delay(3000);
+  database->run();
 }
 
 void LerSensor()
@@ -52,18 +56,9 @@ void DataAtual()
   lcd->clear();
   lcd->setCursor(0, 0);
   DiaAtual(date->getNumDia());
-  lcd->print(date->getDia());
-  lcd->print("/");
-  lcd->print(date->getMes());
-  lcd->print("/");
-  lcd->print(date->getAno());
-
+  lcd->print(date->dataAtual());
   lcd->setCursor(0, 1);
-  lcd->print(date->getHora());
-  lcd->print(":");
-  lcd->print(date->getMinuto());
-  lcd->print(":");
-  lcd->print(date->getSegundo());
+  lcd->print(date->horarioAtual());
 }
 
 void DiaAtual(int numDia)
