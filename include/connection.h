@@ -8,16 +8,16 @@
 class Connection
 {
 private:
-    // Conexão com o wifi
-    #define SSID "FONMART"
-    #define SSID_PASS "fmtwifi01021988/2019"
-    // Conexão com o banco de dados
-    #define USER_DB "estagiario_3"
-    #define DB_PASS "Abc12345"
+// Conexão com o wifi
+#define SSID "FONMART"
+#define SSID_PASS "fmtwifi01021988/2019"
+// Conexão com o banco de dados
+#define USER_DB "estagiario_3"
+#define DB_PASS "Abc12345"
 
-    #define pinNoteiro 8
-    #define esperaLeitura 500 // TIME OUT DA LEITURA
-    #define FINALIZADA true
+#define pinNoteiro 8
+#define esperaLeitura 500 // TIME OUT DA LEITURA
+#define FINALIZADA true
 
     IPAddress *server_ip = new IPAddress(85, 10, 205, 173); // Endereço do banco
     Data *date;
@@ -42,9 +42,6 @@ private:
         if (WiFi.status() == WL_NO_MODULE)
         {
             return false;
-            while (true)
-            {
-            }
         }
         String fv = WiFi.firmwareVersion();
         if (fv < "1.0.0")
@@ -58,6 +55,11 @@ private:
             Serial.println(SSID);
             status = WiFi.begin(SSID, SSID_PASS);
             delay(10000);
+
+            if (status != WL_CONNECTED)
+            {
+                Serial.println("Falha na conexão Wi-Fi. Tentando novamente...");
+            }
         }
         Serial.println("Conectado!");
         return true;
@@ -77,7 +79,7 @@ private:
         valorInserido++;
         controleLeitura = millis();
     }
-    static Connection *instance;  
+    static Connection *instance;
 
 public:
     Connection(Data *data, dht *sensor)
