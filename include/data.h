@@ -3,11 +3,11 @@
 class Data
 {
 private:
-#define segL 15
-#define minL 24
-#define horL 9
+#define segL 00
+#define minL 00
+#define horL 11
 #define d_semL 5
-#define d_mesL 25
+#define d_mesL 31
 #define mesL 8
 #define anoL 2023
 

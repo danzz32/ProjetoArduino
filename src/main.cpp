@@ -2,17 +2,17 @@
 #include "../lib/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 #include "../lib/DHT/dht.h"
 #include "data.h"
-#include "connection.h"
+// #include "connection.h"
 
 #define clk 6
 #define dat 7
 #define rst 8
 
-const int pinoDHT11 = A2; // Pino analógico utilizado pelo DHT11
+const int pinoDHT11 = T4;
 dht sensor;               // Sensor para medir temperatura e umidade
 LiquidCrystal_I2C *lcd = new LiquidCrystal_I2C(0x27, 20, 4);
 Data *date = new Data(clk, dat, rst);
-Connection *database = new Connection(date, &sensor);
+// Connection *database = new Connection(date, &sensor);
 
 void LerSensor();
 void DataAtual();
@@ -24,7 +24,7 @@ void setup()
   delay(2000);
   lcd->init();
   lcd->backlight();
-  database->begin();
+  // database->begin();
 }
 
 void loop()
@@ -33,7 +33,7 @@ void loop()
   delay(3000);
   DataAtual();
   delay(3000);
-  database->run();
+  // database->run();
 }
 
 void LerSensor()
