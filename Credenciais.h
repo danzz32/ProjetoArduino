@@ -1,10 +1,10 @@
 #ifndef Credentials_h
 #define Credentials_h
 
-char ssid[] = "Alviverde oi fibra 2.4G";            
-char pass[] = "faseaustenita211";        
+char ssid[] = "";  // Nome da rede WIFI
+char pass[] = "";  // Senha do WIFI
 
-char user[]         = "estagiario_3"; // "espressif" foi o usuário criado no início
-char password[]     = "Abc12345";     // senha criada com o usuário
+char user[] = "estagiario_3";  // nome do usuário do server
+char password[] = "Abc12345";  // senha criada com o usuário
 
-#endif    //Credentials_h
+#endif  //Credentials_h
