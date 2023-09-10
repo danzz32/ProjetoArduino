@@ -4,7 +4,7 @@
 char ssid[] = "";  // Nome da rede WIFI
 char pass[] = "";  // Senha do WIFI
 
-char user[] = "estagiario_3";  // nome do usuário do server
-char password[] = "Abc12345";  // senha criada com o usuário
+char user[] = "";  // nome do usuário do server
+char password[] = "";  // senha criada com o usuário
 
 #endif  //Credentials_h
