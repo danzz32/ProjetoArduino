@@ -23,8 +23,7 @@ void EnviaDados(float temperatura, float umidade);
 
 void setup() {
   Serial.begin(115200);
-  while (!Serial && millis() < 5000)
-    ;  // Aguarda a conexão com a porta Serial
+  while (!Serial && millis() < 5000);  // Aguarda a conexão com a porta Serial
 
   MYSQL_DISPLAY1("\nInicializando a placa  ", ARDUINO_BOARD);
   MYSQL_DISPLAY(MYSQL_MARIADB_GENERIC_VERSION);
